@@ -114,7 +114,69 @@ function SidEncounter() {
 }
 
 function Werewolfroute() {
-  console.log("wolf");
+  character.health = 65;
+  character.damage = DamageScore(5, 15);
+  console.log(character);
+  let encounterOne = prompt(
+    "You walk in and encounter an adorable monster. Do you Feed it or Bite it?"
+  );
+  if (encounterOne.toLowerCase() == "feed") {
+    alert(
+      "The minister tries to bite you but you avoid it and roar. It now respects you and follows you around."
+    );
+    character.inventory.push("minimonster");
+    console.log(character);
+  } else if (encounterOne == "bite") {
+    alert("You killed it");
+    console.log(character);
+  }
+
+  let encounterTwo = prompt(
+    "Now you see a ladder, Where do you want to go next? Up or Down? "
+  );
+  if (encounterTwo == "up") {
+    alert(
+      "AHA! the ladder broke and you fell down! losing 10 hp. and now you see a MOMSTER!"
+    );
+    character.health -= 10;
+
+    checkInventory();
+  } else if (encounterTwo == "down") {
+    alert("BOOOM!! Now you see a MOMSTER!");
+    checkInventory();
+  }
+
+  if (checkHealth(character.health, character.name)) {
+    return;
+  }
+
+  let encounterThree = prompt(
+    "Now you have defeated the MOMSTER, you keep going down the dungeon, Suddenly you see two doors one red and one blue which one do you choose?"
+  );
+  if (encounterThree == "red") {
+    alert(
+      `Its Ben!! and he says:"It is dangerous out there, take this!" you acquire a cup of yerba mate and get fully healed`
+    );
+    character.health = 65;
+  } else if (encounterThree == "blue") {
+    SidEncounter();
+  }
+
+  let encounterFour = prompt(
+    "You continue down the corridor and encountered a cat-shaped door with a cat poster on it. The poster is really cute so you decide to steal it. Do you want to enter the door? (yes or no)"
+  );
+  if (encounterFour == "yes") {
+    JimEncounter();
+    if (checkHealth(character.health, character.name)) {
+      return;
+    }
+  } else if (encounterFour == "no") {
+    alert("you are stuck in a limbo!");
+    character.health -= 100;
+    if (checkHealth(character.health, character.name)) {
+      return;
+    }
+  }
 }
 
 function checkInventory() {
